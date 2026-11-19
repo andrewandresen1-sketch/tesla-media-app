@@ -1,0 +1,45 @@
+{
+  "schema": "tesla-media-library/v1",
+  "generated_for": "Phase 13 Tesla parked media app",
+  "items": [
+    {
+      "id": "demo-loop",
+      "title": "Diagnostic Loop",
+      "subtitle": "Synthetic 6 s H.264 ladder · WebCodecs",
+      "description": "A locally generated 1280×720 H.264 clip with 30 fps motion, a flashing second marker and three quality rungs. No third-party media.",
+      "kind": "demo",
+      "backend": "webcodecs",
+      "container": "mp4",
+      "featured": true,
+      "loop": true,
+      "audio": "none",
+      "duration_ms": 6009.5,
+      "defaultQuality": "720p",
+      "accent": "blue",
+      "variants": [
+        { "quality": "360p", "label": "360p", "url": "media/360p-h264.mp4", "width": 640, "height": 360, "bytes": 448495 },
+        { "quality": "540p", "label": "540p", "url": "media/540p-h264.mp4", "width": 960, "height": 540, "bytes": 1648976 },
+        { "quality": "720p", "label": "720p", "url": "media/720p-h264.mp4", "width": 1280, "height": 720, "bytes": 2654303 }
+      ]
+    },
+    {
+      "id": "demo-vp8",
+      "title": "VP8 Comparison",
+      "subtitle": "Native <video> backend · 720p WebM",
+      "description": "The same synthetic source encoded as VP8 WebM. This item exercises the automatic native playback backend and the browser's own A/V clock.",
+      "kind": "demo",
+      "backend": "native",
+      "container": "webm",
+      "featured": false,
+      "loop": true,
+      "audio": "native",
+      "duration_ms": 6009.5,
+      "defaultQuality": "720p",
+      "accent": "violet",
+      "url": "media/720p-vp8.webm",
+      "quality": "720p",
+      "width": 1280,
+      "height": 720
+    }
+  ]
+}
