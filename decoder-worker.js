@@ -449,7 +449,10 @@ function tick() {
       buffered_ahead_ms: Math.round(bufferedAheadMs()),
       fps: wall > 0 ? +((stats.presented / wall)).toFixed(2) : 0,
       fps_overall: wall > 0 ? +((stats.presented / wall)).toFixed(2) : 0,
+      decode_queue_max: stats.decodeQueueMax,
+      frame_queue_max: stats.frameQueueMax,
       paint_p50_ms: percentile(stats.paintMs, 50),
+      paint_p95_ms: percentile(stats.paintMs, 95),
       queue_drops: stats.queueDrops,
       late_drops: stats.lateDrops,
       burst_drops: stats.burstDrops,
@@ -467,7 +470,12 @@ function tick() {
       media_offset_ms: +(mediaOffsetUs / 1000).toFixed(1),
       loop_offset_ms: +(loopOffsetUs / 1000).toFixed(1),
       lead_ms: opts.leadMs,
-      run_ms: opts.runMs
+      run_ms: opts.runMs,
+      wall_ms: startedAt ? Math.round(t - startedAt) : 0,
+      loops_completed: loop + 1,
+      fps_media: (stats.firstPresentedTs != null && stats.lastPresentedTs != null && stats.lastPresentedTs > stats.firstPresentedTs)
+        ? +(((stats.presented - 1) / ((stats.lastPresentedTs - stats.firstPresentedTs) / 1e6))).toFixed(2)
+        : null
     });
   }
 }
