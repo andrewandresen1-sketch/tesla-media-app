@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; media-src 'self' blob: https:; worker-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+<title>Tesla Media · Parked Theater</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.2v13.6L19 12z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><path d="M6 6h12v12H6z"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M7 5h2v14H7zM19 5.5v13L9 12z"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M15 5h2v14h-2zM5 5.5v13L15 12z"/></symbol>
+  <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM17 9l5 6m0-6-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-expand" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-library" viewBox="0 0 24 24"><path d="M4 5h6v14H4zM12 5h3v14h-3zM17 5h3v14h-3z"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 19V5M4 19h16M8 16v-5M12 16V8M16 16v-8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M9 7V5h6v2M7 7l1 13h8l1-13M10 11v6M14 11v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0 5-5m-5 5-5-5M4 21h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><path d="M8 8h11v12H8zM5 16V4h11" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-loop" viewBox="0 0 24 24"><path d="M4 8h13l-3-3M20 16H7l3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-film" viewBox="0 0 24 24"><path d="M3 5h18v14H3zM7 5v14M17 5v14M3 9h4M3 15h4M17 9h4M17 15h4" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><path d="M4 4h16v6H4zM4 14h16v6H4zM7 7h.01M7 17h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 8a8 8 0 1 0 1 6M20 3v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark"><svg><use href="#i-film"/></svg></div>
+      <div>
+        <div class="brand-name">TESLA MEDIA</div>
+        <div class="brand-sub">Parked Theater · Phase 13</div>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <button class="nav-btn active" id="navLibrary" type="button"><svg><use href="#i-library"/></svg><span>Library</span></button>
+      <button class="nav-btn" id="navDiagnostics" type="button"><svg><use href="#i-chart"/></svg><span>Diagnostics</span></button>
+      <button class="nav-btn" id="navSettings" type="button"><svg><use href="#i-settings"/></svg><span>Settings</span></button>
+    </nav>
+    <div class="top-status">
+      <span class="chip chip-park"><svg><use href="#i-shield"/></svg>PARKED ONLY</span>
+      <span class="chip" id="backendChip">ready</span>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="view active" id="view-library" aria-label="Library">
+      <div class="library-layout">
+        <section class="player-card" aria-label="Now playing">
+          <div class="stage" id="stage">
+            <div class="stage-media" id="stageCanvasHost"></div>
+            <div class="stage-top">
+              <span class="stage-pill" id="stageStatus">READY</span>
+              <span class="stage-pill ghost" id="stageBackend">—</span>
+            </div>
+            <div class="stage-center">
+              <button class="big-play" id="bigPlay" type="button" aria-label="Play"><svg><use href="#i-play"/></svg></button>
+            </div>
+            <div class="loading" id="loading" hidden><div class="spinner"></div><span>Preparing media…</span></div>
+            <div class="error-panel" id="errorPanel" hidden>
+              <div class="error-icon"><svg><use href="#i-x"/></svg></div>
+              <h3 id="errorTitle">Playback error</h3>
+              <p id="errorText">The media could not be played.</p>
+              <div class="error-actions">
+                <button class="btn" id="errorRetry" type="button"><svg><use href="#i-refresh"/></svg>Retry</button>
+                <button class="btn ghost" id="errorLibrary" type="button"><svg><use href="#i-library"/></svg>Back to library</button>
+              </div>
+            </div>
+            <div class="hud" id="hud" hidden>
+              <div><b>FPS</b><span id="hudFps">—</span></div>
+              <div><b>DROPS</b><span id="hudDrops">—</span></div>
+              <div><b>A/V</b><span id="hudDrift">—</span></div>
+              <div><b>QUEUE</b><span id="hudQueue">—</span></div>
+              <div><b>LEAD</b><span id="hudLead">—</span></div>
+            </div>
+            <div class="empty-stage" id="emptyStage">
+              <div class="empty-art"><svg><use href="#i-film"/></svg></div>
+              <h2>Choose something to watch</h2>
+              <p>Built-in diagnostic media is ready. Add your own authorized H.264/VP8 URL in Settings.</p>
+            </div>
+          </div>
+
+          <div class="now-playing">
+            <div class="now-copy">
+              <h1 id="nowTitle">Nothing playing</h1>
+              <p id="nowSub">Select a title from the library.</p>
+            </div>
+            <div class="now-actions">
+              <label class="mini-label" for="qualitySelect">Quality</label>
+              <select id="qualitySelect" class="select" disabled>
+                <option value="">—</option>
+              </select>
+              <button class="icon-btn" id="loopBtn" type="button" aria-label="Toggle loop" aria-pressed="true" title="Loop"><svg><use href="#i-loop"/></svg></button>
+              <button class="icon-btn" id="statsBtn" type="button" aria-label="Toggle statistics" aria-pressed="false" title="Statistics"><svg><use href="#i-chart"/></svg></button>
+            </div>
+          </div>
+
+          <div class="progress-wrap">
+            <span class="time" id="timeNow">0:00</span>
+            <input class="range" id="seekBar" type="range" min="0" max="1000" step="1" value="0" aria-label="Seek">
+            <span class="time" id="timeTotal">0:00</span>
+          </div>
+
+          <div class="transport">
+            <button class="icon-btn" id="prevBtn" type="button" aria-label="Previous title" title="Previous"><svg><use href="#i-prev"/></svg></button>
+            <button class="play-btn" id="playBtn" type="button" aria-label="Play"><svg><use href="#i-play"/></svg></button>
+            <button class="icon-btn" id="stopBtn" type="button" aria-label="Stop" title="Stop"><svg><use href="#i-stop"/></svg></button>
+            <button class="icon-btn" id="nextBtn" type="button" aria-label="Next title" title="Next"><svg><use href="#i-next"/></svg></button>
+            <div class="volume">
+              <button class="icon-btn" id="muteBtn" type="button" aria-label="Mute" title="Mute"><svg><use href="#i-volume"/></svg></button>
+              <input class="range volume-range" id="volumeBar" type="range" min="0" max="100" step="1" value="80" aria-label="Volume">
+            </div>
+            <button class="icon-btn" id="fullBtn" type="button" aria-label="Fullscreen" title="Fullscreen"><svg><use href="#i-expand"/></svg></button>
+          </div>
+        </section>
+
+        <aside class="sidebar" aria-label="Media library">
+          <div class="sidebar-head">
+            <div>
+              <h2>Library</h2>
+              <p id="fileCount">2 titles</p>
+            </div>
+            <button class="btn small" id="addUrlBtn" type="button"><svg><use href="#i-plus"/></svg>Add URL</button>
+          </div>
+          <div class="library-grid" id="libraryGrid"></div>
+          <div class="sidebar-note">
+            <svg><use href="#i-shield"/></svg>
+            <span>No analytics. No uploads. Media stays on this car and the sources you add.</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="view" id="view-diagnostics" aria-label="Diagnostics">
+      <div class="view-head">
+        <div>
+          <h1>Diagnostics</h1>
+          <p>Live pipeline measurements for the current session and completed runs.</p>
+        </div>
+        <div class="view-actions">
+          <span class="chip" id="diagState">idle</span>
+          <button class="btn small ghost" id="clearHistoryBtn" type="button">Clear history</button>
+        </div>
+      </div>
+
+      <div class="metric-grid" id="diagCards">
+        <div class="metric"><b>Presented fps</b><span id="mFps">—</span><small id="mFpsSub">—</small></div>
+        <div class="metric"><b>Dropped</b><span id="mDrops">—</span><small id="mDropsSub">q / l / b</small></div>
+        <div class="metric"><b>Rebuffers</b><span id="mRebuf">—</span><small id="mRebufSub">stalls</small></div>
+        <div class="metric"><b>Audible drift</b><span id="mDrift">—</span><small id="mDriftSub">max</small></div>
+        <div class="metric"><b>Decoder queue</b><span id="mDQ">—</span><small id="mDQSub">frames</small></div>
+        <div class="metric"><b>Frame queue</b><span id="mFQ">—</span><small id="mFQSub">frames</small></div>
+        <div class="metric"><b>Lead</b><span id="mLead">—</span><small id="mLeadSub">adaptive</small></div>
+        <div class="metric"><b>Errors</b><span id="mErrors">—</span><small id="mErrorsSub">recoveries</small></div>
+      </div>
+
+      <div class="panel chart-panel">
+        <div class="panel-head"><h2>Session timeline</h2><span class="small" id="chartNote">waiting for playback</span></div>
+        <canvas id="chart" width="1100" height="190" aria-label="FPS and drift chart"></canvas>
+        <div class="legend"><span class="dot blue"></span>fps <span class="dot amber"></span>audible drift (ms)</div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-head"><h2>Current run</h2><span class="small" id="runReason">—</span></div>
+          <table class="data-table"><tbody id="diagTable"></tbody></table>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Validation runs</h2><span class="small">parked only</span></div>
+          <p class="small">Runs the built-in 720p WebCodecs loop for a fixed duration. Stop is honest: a partial run keeps its data.</p>
+          <div class="test-grid">
+            <button class="btn test-run" data-seconds="12" type="button">12 s</button>
+            <button class="btn test-run" data-seconds="60" type="button">60 s</button>
+            <button class="btn test-run" data-seconds="300" type="button">5 min</button>
+            <button class="btn test-run" data-seconds="900" type="button">15 min</button>
+            <button class="btn danger" id="stopTestBtn" type="button"><svg><use href="#i-stop"/></svg>Stop test</button>
+          </div>
+          <p class="small" id="validationStatus">No validation running.</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2>Export</h2><span class="small">No upload. Copy, download or photograph the short code.</span></div>
+        <div class="export-actions">
+          <button class="btn" id="copyBtn" type="button"><svg><use href="#i-copy"/></svg>Copy JSON</button>
+          <button class="btn" id="downloadBtn" type="button"><svg><use href="#i-download"/></svg>Download JSON</button>
+          <button class="btn ghost" id="selectBtn" type="button">Select all</button>
+        </div>
+        <label class="mini-label" for="shortOut">Short code</label>
+        <pre id="shortOut">—</pre>
+        <label class="mini-label" for="jsonOut">JSON result</label>
+        <textarea id="jsonOut" readonly spellcheck="false"></textarea>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h2>History</h2><span class="small" id="historyNote">0 runs</span></div>
+        <table class="data-table history-table">
+          <thead><tr><th>Started</th><th>Title</th><th>Backend</th><th>Quality</th><th>fps</th><th>Dropped</th><th>Rebuf</th><th>Drift</th></tr></thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="view" id="view-settings" aria-label="Settings">
+      <div class="view-head">
+        <div>
+          <h1>Settings</h1>
+          <p>Playback defaults, authorized sources and privacy.</p>
+        </div>
+        <span class="chip" id="settingsVersion">phase13-1</span>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-head"><h2>Playback</h2><span class="small">desktop and vehicle</span></div>
+          <div class="setting-row">
+            <div><b>Default quality</b><p>Lower rungs are real 360p/540p H.264 files, not scaled 720p.</p></div>
+            <select class="select" id="settingsQuality">
+              <option value="720p" selected>720p</option>
+              <option value="540p">540p</option>
+              <option value="360p">360p</option>
+            </select>
+          </div>
+          <div class="setting-row">
+            <div><b>Loop diagnostic media</b><p>The built-in demo is 6 s; loop it for sustained playback.</p></div>
+            <label class="switch"><input type="checkbox" id="settingsLoop" checked><span></span></label>
+          </div>
+          <div class="setting-row">
+            <div><b>Adaptive decode lead</b><p>Start at 300 ms; raise to 450/600 ms only after a rebuffer or queue pressure.</p></div>
+            <label class="switch"><input type="checkbox" id="settingsAdaptive" checked><span></span></label>
+          </div>
+          <div class="setting-row">
+            <div><b>Audio sync tone</b><p>Diagnostic beep each second. Off for ordinary viewing.</p></div>
+            <label class="switch"><input type="checkbox" id="settingsAudio"><span></span></label>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Authorized media</h2><span class="small">native H.264/VP8/VP9 URLs</span></div>
+          <p class="small">Add a direct, non-DRM media URL. Remote URLs use the native video backend so your personal media server is never proxied by this app.</p>
+          <label class="mini-label" for="urlTitle">Title</label>
+          <input class="input" id="urlTitle" placeholder="e.g. Weekend recording" autocomplete="off">
+          <label class="mini-label" for="urlValue">Media URL</label>
+          <input class="input" id="urlValue" placeholder="https://media.example/movie.mp4" autocomplete="off" inputmode="url">
+          <p class="form-error" id="urlError" hidden></p>
+          <button class="btn" id="addMediaBtn" type="button"><svg><use href="#i-plus"/></svg>Add to library</button>
+          <div class="user-list" id="userMediaList"></div>
+          <p class="small">A personal media server works by adding its direct file URLs. CORS is not needed for native playback. DRM and access-control bypass are out of scope.</p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-head"><h2>Privacy</h2><span class="small">local only</span></div>
+          <ul class="plain-list">
+            <li>No analytics, telemetry or diagnostic uploads.</li>
+            <li>Pages, scripts and built-in media are same-origin.</li>
+            <li>Remote media URLs are opened by the browser's native video element only after you add them.</li>
+            <li>User media and preferences are stored in this browser's localStorage; diagnostics are in memory until you export them.</li>
+            <li>No camera, microphone, location, contacts or vehicle APIs are requested.</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h2>Maintenance</h2><span class="small">safe defaults</span></div>
+          <p class="small">Reset local preferences and remove added URLs. Built-in media and research data are not touched.</p>
+          <button class="btn danger" id="resetSettings" type="button">Reset local settings</button>
+          <div class="about-box">
+            <div><b>Application</b><span id="aboutVersion">phase13-1</span></div>
+            <div><b>Engine</b><span>WebCodecs worker + native fallback</span></div>
+            <div><b>Baseline</b><span>Phase 11/12 vehicle-guided pipeline</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+    <div class="gate-card">
+      <div class="gate-badge"><svg><use href="#i-shield"/></svg>PARKED ONLY</div>
+      <h1 id="gateTitle">Tesla Media</h1>
+      <p class="gate-lead">A parked theater for the browser. Playback is for a parked vehicle, operated by a passenger. This app does not detect or bypass driving-state protections.</p>
+      <label class="gate-check">
+        <input type="checkbox" id="parkConfirm">
+        <span>The vehicle is parked and a passenger is operating this page.</span>
+      </label>
+      <button class="btn primary gate-enter" id="gateEnter" type="button" disabled>Enter media app</button>
+      <p class="gate-note">Nothing loads or plays before this confirmation. No analytics, no uploads.</p>
+    </div>
+  </div>
+</div>
+
+<script src="core.js"></script>
+<script src="mp4-demux.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
