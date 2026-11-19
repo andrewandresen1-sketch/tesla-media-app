@@ -1154,10 +1154,22 @@
     this.video = null;
   };
 
-  function fetchWithTimeout(url, ms) {
-    var ctrl = new AbortController();
-    var t = setTimeout(function () { ctrl.abort(); }, ms);
-    return fetch(url, { cache: "force-cache", signal: ctrl.signal }).finally(function () { clearTimeout(t); });
+  async function fetchWithTimeout(url, ms) {
+    var last = null;
+    for (var attempt = 0; attempt < 3; attempt++) {
+      var ctrl = new AbortController();
+      var t = setTimeout(function () { ctrl.abort(); }, ms);
+      try {
+        var res = await fetch(url, { cache: "force-cache", signal: ctrl.signal });
+        clearTimeout(t);
+        return res;
+      } catch (e) {
+        clearTimeout(t);
+        last = e;
+        if (attempt < 2) await new Promise(function (r) { setTimeout(r, 500 * (attempt + 1)); });
+      }
+    }
+    throw last || new Error("fetch failed");
   }
 
   function describeMediaError(err) {
