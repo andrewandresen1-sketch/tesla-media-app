@@ -529,8 +529,12 @@
       onError: function (message) {
         pushError(message);
         if (state.run) state.run.errors.push(message);
-        toast("Decoder error: " + message);
-        setStageStatus("RECOVERING", "buffer");
+        if (state.backend === "native") {
+          showPlaybackError("Playback error", message, true);
+        } else {
+          toast("Decoder error: " + message + " (recovering)");
+          setStageStatus("RECOVERING", "buffer");
+        }
       },
       onLog: function (message) { state.logs.push({ t: Date.now(), message: message }); if (state.logs.length > 300) state.logs.shift(); },
       onSeeked: function (info) {
@@ -573,6 +577,9 @@
     stopTone();
     finalizeRun(reason, stats);
     updateControls();
+    if (reason === "error" || reason === "startup-failed") {
+      showPlaybackError("Decoder stopped", "The decoder could not recover. Try another quality, the native VP8 item, or Reset.", true);
+    }
     setTimeout(function () {
       if (state.engine && state.engine.done) {
         try { state.engine.destroy(); } catch (e) {}
@@ -582,7 +589,11 @@
     if (state.validation) {
       var sec = state.validation.seconds;
       state.audioSync = state.validation.audioWas;
+      state.adaptive = state.validation.adaptiveWas;
+      state.defaultQuality = state.validation.qualityWas;
       els.settingsAudio.checked = state.audioSync;
+      els.settingsAdaptive.checked = state.adaptive;
+      els.settingsQuality.value = state.defaultQuality;
       state.validation = null;
       els.validationStatus.textContent = "Completed " + sec + " s run. Result is in the export panel and history.";
       els.stopTestBtn.disabled = true;
@@ -673,9 +684,15 @@
     updateControls();
     if (state.validation) {
       var was = state.validation.audioWas;
+      var adaptiveWas = state.validation.adaptiveWas;
+      var qualityWas = state.validation.qualityWas;
       state.validation = null;
       state.audioSync = was;
+      state.adaptive = adaptiveWas;
+      state.defaultQuality = qualityWas;
       els.settingsAudio.checked = was;
+      els.settingsAdaptive.checked = adaptiveWas;
+      els.settingsQuality.value = qualityWas;
       els.validationStatus.textContent = "Stopped. Partial result kept if any frames were presented.";
       els.stopTestBtn.disabled = true;
     }
@@ -775,6 +792,11 @@
     state.seeking = false;
     state.positionMs = ms;
     if (state.engine && state.engine.seek) state.engine.seek(ms);
+    if (!state.playing) {
+      state.playing = true; state.paused = false;
+      if (state.engine && state.engine.resume) state.engine.resume();
+      setStageStatus("PLAYING", "live"); updateControls();
+    }
     if (state.run) state.run.events.push({ type: "seek_request", t_ms: Math.round(now()), media_ms: Math.round(ms) });
   }
 
@@ -1641,7 +1663,7 @@
     var demo = state.library.filter(function (i) { return i.id === "demo-loop"; })[0];
     if (!demo) { toast("The built-in diagnostic item is missing."); return; }
     if (!CAPS.webcodecs) { toast("WebCodecs is unavailable; cannot run the H.264 validation."); return; }
-    state.validation = { seconds: seconds, audioWas: state.audioSync };
+    state.validation = { seconds: seconds, audioWas: state.audioSync, adaptiveWas: state.adaptive, qualityWas: state.defaultQuality };
     state.audioSync = true;
     state.adaptive = true;
     state.lead = 300;
@@ -1664,6 +1686,9 @@
   function addUserMedia(title, url, fromApi) {
     var v = core.validateMediaUrl(url, location.href);
     if (!v.ok) return { ok: false, error: v.error };
+    if (location.protocol === "https:" && v.url.indexOf("http://") === 0) {
+      return { ok: false, error: "This page is HTTPS; use an https:// media URL. Browsers block mixed HTTP media." };
+    }
     if (state.user.some(function (u) { return u.url === v.url; })) return { ok: false, error: "That URL is already in the library." };
     var t = core.sanitizeTitle(title);
     var item = { id: "user-" + Date.now().toString(36), title: t, url: v.url, added_at: new Date().toISOString() };
@@ -1716,7 +1741,11 @@
   function onKey(e) {
     var t = e.target;
     if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) return;
-    if (e.code === "Space") { e.preventDefault(); togglePlay(); }
+    if (e.code === "Space") {
+      if (t && (t.tagName === "BUTTON" || t.tagName === "A")) return;
+      e.preventDefault();
+      togglePlay();
+    }
     else if (e.code === "ArrowLeft") { e.preventDefault(); onSeekCommitTo(Math.max(0, state.positionMs - 5000)); }
     else if (e.code === "ArrowRight") { e.preventDefault(); onSeekCommitTo(Math.min(state.durationMs, state.positionMs + 5000)); }
     else if (e.key === "f" || e.key === "F") toggleFullscreen();
@@ -1726,6 +1755,11 @@
     state.positionMs = ms;
     els.seekBar.value = String(Math.round(ms));
     if (state.engine && state.engine.seek) state.engine.seek(ms);
+    if (!state.playing) {
+      state.playing = true; state.paused = false;
+      if (state.engine && state.engine.resume) state.engine.resume();
+      setStageStatus("PLAYING", "live"); updateControls();
+    }
   }
 
   /* ------------------------------------------------------------- test API */
